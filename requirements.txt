@@ -1,0 +1,8 @@
+discord
+asyncio
+PyNacl
+ffmpeg
+google_trans_new
+gtts
+PyYaml
+PyDictionary
