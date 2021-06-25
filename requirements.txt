@@ -6,3 +6,4 @@ google_trans_new
 gtts
 PyYaml
 PyDictionary
+ffmpeg-python
