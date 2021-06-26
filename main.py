@@ -76,6 +76,18 @@ async def on_message(message):
 
         print("Clearing message...")
         await message.channel.purge(limit=int(message.content.split(" ")[1]))
+    
+    if (message.content == "%_name" or message.content.split(" ")[0] == "%_name"):
+        if (len(message.content.split(" ")) < 2):
+            await message.channel.send('Câu lệnh: %_name <Tên mới>')
+            return
+
+        if (message.content.split(" ")[1] == "" or message.content.split(" ")[1] == " "): 
+            await message.channel.send('Câu lệnh: %_name <Tên mới>')
+            return
+
+        print("Changing channel name...")
+        await message.channel.edit(name=message.content.split(" ")[1])
 
     if (message.content == "%_trans" or message.content.split(" ")[0] == "%_trans"):
         await message.delete()
