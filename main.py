@@ -51,6 +51,7 @@ async def on_message(message):
         contents += " - %_clear <number>: xóa <number> dòng tính từ câu lệnh\n"
         contents += " - %_contain <word>: Từ đồng nghĩa\n"
         contents += " - %_trans <word>: dịch nghĩa của từ\n"
+        contents += " - %_name <name>: đổi tên kênh chat\n"
         contents += " - %_meaning <say> <word>: Lấy nghĩa của từ\n"
         contents += " \n"
         contents += "# Information:\n"
@@ -135,6 +136,10 @@ async def on_message(message):
             meaning = meanings[0]
             if (meaning == "Noun"): meaning = "n"
             elif (meaning == "Verb"): meaning = "v" 
+            elif (meaning == "Adjective"): meaning = "adj"
+            elif (meaning == "Adverb"): meaning = "adv"
+            elif (meaning == "Prepositions"): meaning = "Pre"
+                
             translate_text = translator.translate(word, lang_src='en', lang_tgt='vi')  
             contents += str(word.replace("\n", "") + ' ('+ meaning +'): ' + translate_text.lower()) + '\n'
 
