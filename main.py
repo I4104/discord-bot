@@ -78,6 +78,7 @@ async def on_message(message):
         await message.channel.purge(limit=int(message.content.split(" ")[1]))
     
     if (message.content == "%_name" or message.content.split(" ")[0] == "%_name"):
+        await message.delete()
         if (len(message.content.split(" ")) < 2):
             await message.channel.send('Câu lệnh: %_name <Tên mới>')
             return
@@ -85,10 +86,12 @@ async def on_message(message):
         if (message.content.split(" ")[1] == "" or message.content.split(" ")[1] == " "): 
             await message.channel.send('Câu lệnh: %_name <Tên mới>')
             return
-
-        print("Changing channel name...")
-        await message.channel.edit(name=message.content.split(" ")[1])
-
+        try:
+            print("Changing channel name...")
+            await message.channel.edit(name=message.content.split(" ")[1])
+        except:
+            await message.channel.send("Bot không có quyền cho việc này!")
+            
     if (message.content == "%_trans" or message.content.split(" ")[0] == "%_trans"):
         await message.delete()
         if (len(message.content.split(" ")) < 2):
