@@ -308,7 +308,7 @@ async def on_message(message):
         myobj = gTTS(text=request, lang=lang, slow=False) 
         myobj.save("output.mp3")
          
-        voice_client.play(discord.FFmpegPCMAudio(source='output.mp3'), after=lambda x:os.remove("output.mp3"))
+        voice_client.play(discord.FFmpegPCMAudio(options = "-loglevel panic", source='output.mp3'), after=lambda x:os.remove("output.mp3"))
 
         await message.delete()
 
