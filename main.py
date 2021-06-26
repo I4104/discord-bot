@@ -205,7 +205,7 @@ async def on_message(message):
                 myobj = gTTS(text=translate_text, lang=language, slow=False) 
                 myobj.save("output.mp3")
                  
-                voice_client.play(discord.FFmpegPCMAudio(executable="ffmpeg/bin/ffmpeg.exe", source='output.mp3'), after=lambda x:os.remove("output.mp3"))
+                voice_client.play(discord.FFmpegPCMAudio(options = "-loglevel panic", source='output.mp3'), after=lambda x:os.remove("output.mp3"))
 
         except Exception:
             await message.channel.send("Không tồn tại nghĩa của từ này!")
@@ -270,7 +270,7 @@ async def on_message(message):
             myobj = gTTS(text=contents, lang=language, slow=False) 
             myobj.save("output.mp3")
 
-            voice_client.play(discord.FFmpegPCMAudio(executable="ffmpeg/bin/ffmpeg.exe", source='output.mp3'), after=lambda x:os.remove("output.mp3"))
+            voice_client.play(discord.FFmpegPCMAudio(options = "-loglevel panic", source='output.mp3'), after=lambda x:os.remove("output.mp3"))
 
     if (message.content == "%_leave"):
         try:
