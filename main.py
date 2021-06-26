@@ -100,12 +100,24 @@ async def on_message(message):
             return
 
         if (message.content.split(" ")[1] == "" or message.content.split(" ")[1] == " "): 
-            await message.channel.send('Câu lệnh: %_trans <Số lượng>')
+            await message.channel.send('Câu lệnh: %_trans <word>')
             return
 
         print("Translate " + message.content.split(" ")[1])
         translate_text = translator.translate(message.content.split(" ")[1], lang_src='en', lang_tgt='vi')
-        await message.channel.send(message.content.split(" ")[1] + ": " + translate_text)
+        
+        meanings = list(dictionary.meaning(message.content.split(" ")[1]).keys())
+        meaning = meanings[0]
+        if (meaning == "Noun"): meaning = "n"
+        elif (meaning == "Verb"): meaning = "v" 
+        elif (meaning == "Adjective"): meaning = "adj"
+        elif (meaning == "Adverb"): meaning = "adv"
+        elif (meaning == "Prepositions"): meaning = "Pre"
+            
+        embed = discord.Embed(color=0xff0000)
+        embed.add_field(message.author.mention() + " " + name=message.content.split(" ")[1] + '('+ meaning  +'): ' + translate_text, value=contents, inline=False)
+        embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
+        await message.channel.send(embed=embed)
 
     if (message.content == "%_words" or message.content.split(" ")[0] == "%_words"):
         if (len(message.content.split(" ")) < 2):
