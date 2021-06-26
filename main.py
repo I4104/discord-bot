@@ -117,7 +117,7 @@ async def on_message(message):
         mention = message.author.mention
         
         embed = discord.Embed(color=0xff0000)
-        embed.add_field(name="Translate for" + mention, value=message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text, inline=False)
+        embed.add_field(name="Translator", value=message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text + "\n" + mention, inline=False)
         embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
         await message.channel.send(embed=embed)
 
