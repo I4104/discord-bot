@@ -312,5 +312,5 @@ async def on_message(message):
 
         await message.delete()
 
-client.run('ODU4MTYwNDg5NTYxMDYzNDQ0.YNaGPA.YXTnLTQP7B0vcSykJ2q5xWF0Wus')
+client.run('ODU4MTYwNDg5NTYxMDYzNDQ0.YNaGPA.I2vrbm0woXEEFV584puMk8bM3eU')
 
