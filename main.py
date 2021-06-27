@@ -105,7 +105,11 @@ async def on_message(message):
                 reader.write("\n" +  message.content.split(" ")[1])
 
         note = list()
-        with open(id + '.txt', 'r+') as reader:
+        if os.path.exists(id + '.txt'):
+            f = open(id + '.txt', 'w+')
+            f.close()
+            
+        with open(id + '.txt', 'r') as reader:
             for line in reader:
                 note.append(line)
         with open('vocabulary.txt', 'a+') as reader:
@@ -131,7 +135,11 @@ async def on_message(message):
         id = str(message.author.id)
        
         note = list()
-        with open(id + '.txt', 'r+') as reader:
+        if os.path.exists(id + '.txt'):
+            f = open(id + '.txt', 'w+')
+            f.close()
+            
+        with open(id + '.txt', 'r') as reader:
             for line in reader:
                 note.append(line)
                 
