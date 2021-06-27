@@ -77,7 +77,7 @@ async def on_message(message):
             return
 
         print("Note " + message.content.split(" ")[1])
-        try
+        try:
             translate_text = translator.translate(message.content.split(" ")[1], lang_src='en', lang_tgt='vi')
 
             meanings = list(dictionary.meaning(message.content.split(" ")[1]).keys())
