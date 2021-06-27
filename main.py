@@ -110,7 +110,7 @@ async def on_message(message):
         contents  = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
         contents += "\n\n"
         contents += "+===================+"
-        contents += "Đã note: " + len(note) + " từ"
+        contents += "Đã note: " + str(len(note)) + " từ"
         contents += "+===================+"
         contents += "\n\n"
             
