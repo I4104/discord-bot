@@ -105,7 +105,7 @@ async def on_message(message):
                 reader.write("\n" +  message.content.split(" ")[1])
 
         note = list()
-        if os.path.exists(id + '.txt'):
+        if !os.path.exists(id + '.txt'):
             f = open(id + '.txt', 'w+')
             f.close()
             
@@ -135,7 +135,7 @@ async def on_message(message):
         id = str(message.author.id)
        
         note = list()
-        if os.path.exists(id + '.txt'):
+        if !os.path.exists(id + '.txt'):
             f = open(id + '.txt', 'w+')
             f.close()
             
