@@ -102,7 +102,7 @@ async def on_message(message):
                 reader.write("\n" +  message.content.split(" ")[1])
 
         note = list()
-        with open(id + '.txt', 'r+') as reader:
+        with open(id + '.txt', 'a+') as reader:
             for line in reader:
                 note.append(line)
             if message.content.split(" ")[1] not in note:
@@ -127,7 +127,7 @@ async def on_message(message):
         id = str(message.author.id)
        
         note = list()
-        with open(id + '.txt', 'r') as reader:
+        with open(id + '.txt', 'a+') as reader:
             for line in reader:
                 note.append(line)
                 
