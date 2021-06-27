@@ -91,14 +91,14 @@ async def on_message(message):
         file_name = mention.replace("<", "").replace(">", "")
         
         all_words = list()
-        with open('vocabulary.txt', 'w') as reader:
+        with open('vocabulary.txt', 'w+') as reader:
             for line in reader:
                 all_words.append(line)
             if message.content.split(" ")[1] not in all_words:
                 reader.write("\n" +  message.content.split(" ")[1])
         
         note = list()
-        with open(file_name + '.txt', 'w') as reader:
+        with open(file_name + '.txt', 'w+') as reader:
             for line in reader:
                 note.append(line)
             if message.content.split(" ")[1] not in note:
