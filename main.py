@@ -92,7 +92,8 @@ async def on_message(message):
             meaning = "none"
             
         mention = message.author.mention
-        file_name = mention.replace("<", "").replace(">", "")
+        file_name = message.author.id
+        
         all_words = list()
         with open('vocabulary.txt', 'w+') as reader:
             for line in reader:
@@ -109,11 +110,9 @@ async def on_message(message):
 
         contents  = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
         contents += "\n\n"
-        contents += "+===================+\n"
-        contents += "Đã note: " + str(len(note)) + " từ\n"
-        contents += "+===================+\n"
+        contents += "- Đã note: " + str(len(note)) + " từ\n"
         contents += "\n"
-            
+        
         embed = discord.Embed(color=0xff0000)
         embed.add_field(name="Note vocabulary:", value=contents, inline=False)
         embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
