@@ -95,16 +95,18 @@ async def on_message(message):
         id = str(message.author.id)
         
         all_words = list()
-        with open('vocabulary.txt', 'r+') as reader:
+        with open('vocabulary.txt', 'r') as reader:
             for line in reader:
                 all_words.append(line)
+        with open('vocabulary.txt', 'a') as reader:
             if message.content.split(" ")[1] not in all_words:
                 reader.write("\n" +  message.content.split(" ")[1])
 
         note = list()
-        with open(id + '.txt', 'a+') as reader:
+        with open(id + '.txt', 'r+') as reader:
             for line in reader:
                 note.append(line)
+        with open('vocabulary.txt', 'a+') as reader:
             if message.content.split(" ")[1] not in note:
                 reader.write("\n" + message.content.split(" ")[1])
 
@@ -127,7 +129,7 @@ async def on_message(message):
         id = str(message.author.id)
        
         note = list()
-        with open(id + '.txt', 'a+') as reader:
+        with open(id + '.txt', 'r+') as reader:
             for line in reader:
                 note.append(line)
                 
