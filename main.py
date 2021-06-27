@@ -92,7 +92,7 @@ async def on_message(message):
             meaning = "none"
             
         mention = message.author.mention
-        file_name = message.author.id
+        file_name = str(message.author.id)
         
         all_words = list()
         with open('vocabulary.txt', 'w+') as reader:
