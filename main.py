@@ -87,35 +87,32 @@ async def on_message(message):
             elif (meaning == "Adjective"): meaning = "adj"
             elif (meaning == "Adverb"): meaning = "adv"
             elif (meaning == "Prepositions"): meaning = "Pre"
-
-            mention = message.author.mention
-            file_name = mention.replace("<", "").replace(">", "")
-            try:
-                all_words = list()
-                with open('vocabulary.txt', 'w+') as reader:
-                    for line in reader:
-                        all_words.append(line)
-                    if message.content.split(" ")[1] not in all_words:
-                        reader.write("\n" +  message.content.split(" ")[1])
-
-                note = list()
-                with open(file_name + '.txt', 'w+') as reader:
-                    for line in reader:
-                        note.append(line)
-                    if message.content.split(" ")[1] not in note:
-                        reader.write("\n" + message.content.split(" ")[1])
-            except Exception: 
-                print(Exception)
-                
-            contents  = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
-            contents += "\n\n"
-            contents += "+===================+"
-            contents += "Đã note: " + note + " từ"
-            contents += "+===================+"
-            contents += "\n\n"
-
         except Exception: 
-            contents = "Từ này không có nghĩa"
+            translate_text = "Từ này không có nghĩa"
+            meaning = "none"
+            
+        mention = message.author.mention
+        file_name = mention.replace("<", "").replace(">", "")
+        all_words = list()
+        with open('vocabulary.txt', 'w+') as reader:
+            for line in reader:
+                all_words.append(line)
+            if message.content.split(" ")[1] not in all_words:
+                reader.write("\n" +  message.content.split(" ")[1])
+
+        note = list()
+        with open(file_name + '.txt', 'w+') as reader:
+            for line in reader:
+                note.append(line)
+            if message.content.split(" ")[1] not in note:
+                reader.write("\n" + message.content.split(" ")[1])
+
+        contents  = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
+        contents += "\n\n"
+        contents += "+===================+"
+        contents += "Đã note: " + len(note) + " từ"
+        contents += "+===================+"
+        contents += "\n\n"
             
         embed = discord.Embed(color=0xff0000)
         embed.add_field(name="Note vocabulary:", value=contents, inline=False)
