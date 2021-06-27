@@ -115,7 +115,7 @@ async def on_message(message):
             contents += "\n\n"
 
         except Exception: 
-            contents"Từ này không có nghĩa"
+            contents = "Từ này không có nghĩa"
             
         embed = discord.Embed(color=0xff0000)
         embed.add_field(name="Note vocabulary:", value=contents, inline=False)
