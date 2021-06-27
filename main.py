@@ -90,21 +90,23 @@ async def on_message(message):
 
             mention = message.author.mention
             file_name = mention.replace("<", "").replace(">", "")
+            try:
+                all_words = list()
+                with open('vocabulary.txt', 'w+') as reader:
+                    for line in reader:
+                        all_words.append(line)
+                    if message.content.split(" ")[1] not in all_words:
+                        reader.write("\n" +  message.content.split(" ")[1])
 
-            all_words = list()
-            with open('vocabulary.txt', 'w+') as reader:
-                for line in reader:
-                    all_words.append(line)
-                if message.content.split(" ")[1] not in all_words:
-                    reader.write("\n" +  message.content.split(" ")[1])
-
-            note = list()
-            with open(file_name + '.txt', 'w+') as reader:
-                for line in reader:
-                    note.append(line)
-                if message.content.split(" ")[1] not in note:
-                    reader.write("\n" + message.content.split(" ")[1])
-
+                note = list()
+                with open(file_name + '.txt', 'w+') as reader:
+                    for line in reader:
+                        note.append(line)
+                    if message.content.split(" ")[1] not in note:
+                        reader.write("\n" + message.content.split(" ")[1])
+            except Exception: 
+                print(Exception)
+                
             contents  = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
             contents += "\n\n"
             contents += "+===================+"
@@ -112,16 +114,14 @@ async def on_message(message):
             contents += "+===================+"
             contents += "\n\n"
 
-            embed = discord.Embed(color=0xff0000)
-            embed.add_field(name="Note vocabulary:", value=contents, inline=False)
-            embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
-            await message.channel.send(embed=embed)
         except Exception: 
-            embed = discord.Embed(color=0xff0000)
-            embed.add_field(name="Thông báo:", value="Từ này không có nghĩa", inline=False)
-            embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
-            await message.channel.send(embed=embed)
+            contents"Từ này không có nghĩa"
             
+        embed = discord.Embed(color=0xff0000)
+        embed.add_field(name="Note vocabulary:", value=contents, inline=False)
+        embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
+        await message.channel.send(embed=embed)
+        
     if (message.content == "%_clear" or message.content.split(" ")[0] == "%_clear"):
         if (len(message.content.split(" ")) < 2):
             await message.channel.send('Câu lệnh: %_clear <Số lượng>')
