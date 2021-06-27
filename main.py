@@ -88,31 +88,33 @@ async def on_message(message):
         elif (meaning == "Prepositions"): meaning = "Pre"
         
         mention = message.author.mention
+        file_name = mention.replace("<", "").replace(">", "")
         
         all_words = list()
-
-        with open('vocabulary.txt', 'r') as reader:
+        with open('vocabulary.txt', 'w') as reader:
             for line in reader:
                 all_words.append(line)
+            if message.content.split(" ")[1] not in all_words:
+                reader.write("\n" +  message.content.split(" ")[1])
         
-        if message.content.split(" ")[1] not in all_words:
-            pass
+        note = list()
+        with open(file_name + '.txt', 'w') as reader:
+            for line in reader:
+                note.append(line)
+            if message.content.split(" ")[1] not in note:
+                reader.write("\n" + message.content.split(" ")[1])
         
-        
+        contents  = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
+        contents += "\n\n"
+        contents += "+===================+"
+        contents += "Đã note: " + note + " từ"
+        contents += "+===================+"
+        contents += "\n\n"
         
         embed = discord.Embed(color=0xff0000)
-        embed.add_field(name="Note vocabulary:", value=message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text, inline=False)
+        embed.add_field(name="Note vocabulary:", value=contents, inline=False)
         embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
         await message.channel.send(embed=embed)
-
-
-
-        embed = discord.Embed(color=0x01cb19)
-        embed.add_field(name='Thông tin:', value=contents, inline=False)
-        embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
-        
-        await message.channel.send(embed=embed)
-
         
     if (message.content == "%_clear" or message.content.split(" ")[0] == "%_clear"):
         if (len(message.content.split(" ")) < 2):
