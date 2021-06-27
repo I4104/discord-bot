@@ -77,45 +77,51 @@ async def on_message(message):
             return
 
         print("Note " + message.content.split(" ")[1])
-        translate_text = translator.translate(message.content.split(" ")[1], lang_src='en', lang_tgt='vi')
-        
-        meanings = list(dictionary.meaning(message.content.split(" ")[1]).keys())
-        meaning = meanings[0]
-        if (meaning == "Noun"): meaning = "n"
-        elif (meaning == "Verb"): meaning = "v" 
-        elif (meaning == "Adjective"): meaning = "adj"
-        elif (meaning == "Adverb"): meaning = "adv"
-        elif (meaning == "Prepositions"): meaning = "Pre"
-        
-        mention = message.author.mention
-        file_name = mention.replace("<", "").replace(">", "")
-        
-        all_words = list()
-        with open('vocabulary.txt', 'w+') as reader:
-            for line in reader:
-                all_words.append(line)
-            if message.content.split(" ")[1] not in all_words:
-                reader.write("\n" +  message.content.split(" ")[1])
-        
-        note = list()
-        with open(file_name + '.txt', 'w+') as reader:
-            for line in reader:
-                note.append(line)
-            if message.content.split(" ")[1] not in note:
-                reader.write("\n" + message.content.split(" ")[1])
-        
-        contents  = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
-        contents += "\n\n"
-        contents += "+===================+"
-        contents += "Đã note: " + note + " từ"
-        contents += "+===================+"
-        contents += "\n\n"
-        
-        embed = discord.Embed(color=0xff0000)
-        embed.add_field(name="Note vocabulary:", value=contents, inline=False)
-        embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
-        await message.channel.send(embed=embed)
-        
+        try
+            translate_text = translator.translate(message.content.split(" ")[1], lang_src='en', lang_tgt='vi')
+
+            meanings = list(dictionary.meaning(message.content.split(" ")[1]).keys())
+            meaning = meanings[0]
+            if (meaning == "Noun"): meaning = "n"
+            elif (meaning == "Verb"): meaning = "v" 
+            elif (meaning == "Adjective"): meaning = "adj"
+            elif (meaning == "Adverb"): meaning = "adv"
+            elif (meaning == "Prepositions"): meaning = "Pre"
+
+            mention = message.author.mention
+            file_name = mention.replace("<", "").replace(">", "")
+
+            all_words = list()
+            with open('vocabulary.txt', 'w+') as reader:
+                for line in reader:
+                    all_words.append(line)
+                if message.content.split(" ")[1] not in all_words:
+                    reader.write("\n" +  message.content.split(" ")[1])
+
+            note = list()
+            with open(file_name + '.txt', 'w+') as reader:
+                for line in reader:
+                    note.append(line)
+                if message.content.split(" ")[1] not in note:
+                    reader.write("\n" + message.content.split(" ")[1])
+
+            contents  = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
+            contents += "\n\n"
+            contents += "+===================+"
+            contents += "Đã note: " + note + " từ"
+            contents += "+===================+"
+            contents += "\n\n"
+
+            embed = discord.Embed(color=0xff0000)
+            embed.add_field(name="Note vocabulary:", value=contents, inline=False)
+            embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
+            await message.channel.send(embed=embed)
+        catch except: 
+            embed = discord.Embed(color=0xff0000)
+            embed.add_field(name="Thông báo:", value="Từ này không có nghĩa", inline=False)
+            embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
+            await message.channel.send(embed=embed)
+            
     if (message.content == "%_clear" or message.content.split(" ")[0] == "%_clear"):
         if (len(message.content.split(" ")) < 2):
             await message.channel.send('Câu lệnh: %_clear <Số lượng>')
