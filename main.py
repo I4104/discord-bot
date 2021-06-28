@@ -111,7 +111,7 @@ async def on_message(message):
             with open(id + '.txt', 'r') as reader:
                 for line in reader:
                     note.append(line)
-                    wo = len(all_words)
+                    wo = len(note)
         else:
             f = open(id + '.txt', 'x')
             f.close()
@@ -143,7 +143,7 @@ async def on_message(message):
         if os.path.exists(id + '.txt'):
             with open(id + '.txt', 'r') as reader:
                 for line in reader:
-                    note.append(line)
+                    note.append(line.replace("\r", "").replace("\n", ""))
         else:
             f = open(id + '.txt', 'x')
             f.close()
