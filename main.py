@@ -149,7 +149,9 @@ async def on_message(message):
             f.close()
                 
         contents = ""
+        embed = discord.Embed(color=0xff0000)
         for word in note:
+            
             try:
                 translate_text = translator.translate(word, lang_src='en', lang_tgt='vi')
 
@@ -163,10 +165,8 @@ async def on_message(message):
             except Exception: 
                 translate_text = "Từ này không có nghĩa"
                 meaning = "none"
-            contents += message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text + "\n"
-        
-        embed = discord.Embed(color=0xff0000)
-        embed.add_field(name="Note vocabulary:", value=contents, inline=False)
+            contents = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
+            embed.add_field(name="Note vocabulary:", value=contents, inline=False)
         embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
         await message.channel.send(embed=embed)
         
