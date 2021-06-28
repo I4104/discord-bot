@@ -123,7 +123,7 @@ async def on_message(message):
                 
         contents  = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
         contents += "\n\n"
-        contents += "- Đã note: " + wo + " từ\n"
+        contents += "- Đã note: " + len(wo) + " từ\n"
         contents += "\n"
         
         embed = discord.Embed(color=0xff0000)
@@ -150,23 +150,25 @@ async def on_message(message):
                 
         contents = ""
         embed = discord.Embed(color=0xff0000)
-        for word in note:
-            
-            try:
-                translate_text = translator.translate(word, lang_src='en', lang_tgt='vi')
+        if len(note) > 0:
+            for word in note:
+                try:
+                    translate_text = translator.translate(word, lang_src='en', lang_tgt='vi')
 
-                meanings = list(dictionary.meaning(message.content.split(" ")[1]).keys())
-                meaning = meanings[0]
-                if (meaning == "Noun"): meaning = "n"
-                elif (meaning == "Verb"): meaning = "v" 
-                elif (meaning == "Adjective"): meaning = "adj"
-                elif (meaning == "Adverb"): meaning = "adv"
-                elif (meaning == "Prepositions"): meaning = "Pre"
-            except Exception: 
-                translate_text = "Từ này không có nghĩa"
-                meaning = "none"
-            contents = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
-            embed.add_field(name="Note vocabulary:", value=contents, inline=False)
+                    meanings = list(dictionary.meaning(message.content.split(" ")[1]).keys())
+                    meaning = meanings[0]
+                    if (meaning == "Noun"): meaning = "n"
+                    elif (meaning == "Verb"): meaning = "v" 
+                    elif (meaning == "Adjective"): meaning = "adj"
+                    elif (meaning == "Adverb"): meaning = "adv"
+                    elif (meaning == "Prepositions"): meaning = "Pre"
+                except Exception: 
+                    translate_text = "Từ này không có nghĩa"
+                    meaning = "none"
+                contents = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
+                embed.add_field(name="Note vocabulary:", value=contents, inline=False)
+        else:
+            embed.add_field(name="Note vocabulary:", value="Bạn chưa note từ nào!", inline=False)
         embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
         await message.channel.send(embed=embed)
         
