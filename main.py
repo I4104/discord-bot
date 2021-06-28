@@ -105,17 +105,14 @@ async def on_message(message):
                 reader.write("\n" +  message.content.split(" ")[1])
 
         note = list()
-        if os.path.exists(id + '.txt') == False:
-            f = open(id + '.txt', 'w+')
-            f.close()
-            
-        with open(id + '.txt', 'r') as reader:
+        if os.path.exists(id + '.txt'):
+            with open(id + '.txt', 'r') as reader:
             for line in reader:
                 note.append(line)
-        with open('vocabulary.txt', 'a+') as reader:
-            if message.content.split(" ")[1] not in note:
-                reader.write("\n" + message.content.split(" ")[1])
-
+        else:
+            f = open(id + '.txt', 'w+')
+            f.close()
+        
         contents  = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
         contents += "\n\n"
         contents += "- Đã note: " + str(len(note)) + " từ\n"
@@ -135,13 +132,14 @@ async def on_message(message):
         id = str(message.author.id)
        
         note = list()
-        if os.path.exists(id + '.txt') == False:
-            f = open(id + '.txt', 'w+')
-            f.close()
-            
-        with open(id + '.txt', 'r') as reader:
+        if os.path.exists(id + '.txt'):
+            with open(id + '.txt', 'r') as reader:
             for line in reader:
                 note.append(line)
+        else:
+            f = open(id + '.txt', 'w+')
+            f.close()
+        
                 
         content = ""
         for word in note:
