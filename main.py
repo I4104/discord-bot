@@ -165,7 +165,7 @@ async def on_message(message):
                 except Exception: 
                     translate_text = "Từ này không có nghĩa"
                     meaning = "none"
-                contents = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
+                contents = word + ' ('+ meaning  +'): ' + translate_text
                 embed.add_field(name="Note vocabulary:", value=contents, inline=False)
         else:
             embed.add_field(name="Note vocabulary:", value="Bạn chưa note từ nào!", inline=False)
