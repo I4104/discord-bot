@@ -52,7 +52,7 @@ async def on_message(message):
         contents += " - %_contain <word>: Từ đồng nghĩa\n"
         contents += " - %_trans <word>: dịch nghĩa của từ\n"
         contents += " - %_note <word>: Note lại từ\n"
-        contents += " - %_getnote: xem not cá nhân\n"
+        contents += " - %_getnote: xem note cá nhân\n"
         contents += " - %_name <name>: đổi tên kênh chat\n"
         contents += " - %_meaning <say> <word>: Lấy nghĩa của từ\n"
         contents += " \n"
@@ -117,7 +117,7 @@ async def on_message(message):
             f.close()
         
         with open(id + '.txt', 'a') as reader:
-            if message.content.split(" ")[1] not in all_words:
+            if message.content.split(" ")[1] not in note:
                 reader.write(message.content.split(" ")[1] + "\n")
                 wo += 1
                 
@@ -166,7 +166,7 @@ async def on_message(message):
                     translate_text = "Từ này không có nghĩa"
                     meaning = "none"
                 contents += "- " + word + ' ('+ meaning  +'): ' + translate_text + "\n"
-            embed.add_field(name="Note vocabulary:", value=contents, inline=False)
+            embed.add_field(name="Note vocabulary ("+ str(len(note)) +"):", value=contents, inline=False)
         else:
             embed.add_field(name="Note vocabulary:", value="Bạn chưa note từ nào!", inline=False)
         embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
