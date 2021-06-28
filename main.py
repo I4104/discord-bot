@@ -100,7 +100,7 @@ async def on_message(message):
         wo = 0
         with open('vocabulary.txt', 'r') as reader:
             for line in reader:
-                all_words.append(line)
+                all_words.append(line.replace("\r", "").replace("\n", ""))
                 
         with open('vocabulary.txt', 'a') as reader:
             if message.content.split(" ")[1] not in all_words:
@@ -110,7 +110,7 @@ async def on_message(message):
         if os.path.exists(id + '.txt'):
             with open(id + '.txt', 'r') as reader:
                 for line in reader:
-                    note.append(line)
+                    note.append(line.replace("\r", "").replace("\n", ""))
                     wo = len(note)
         else:
             f = open(id + '.txt', 'x')
