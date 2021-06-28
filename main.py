@@ -123,7 +123,7 @@ async def on_message(message):
                 
         contents  = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
         contents += "\n\n"
-        contents += "- Đã note: " + len(wo) + " từ\n"
+        contents += "- Đã note: " + str(wo) + " từ\n"
         contents += "\n"
         
         embed = discord.Embed(color=0xff0000)
