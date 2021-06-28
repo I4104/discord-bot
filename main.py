@@ -155,7 +155,7 @@ async def on_message(message):
                 try:
                     translate_text = translator.translate(word, lang_src='en', lang_tgt='vi')
 
-                    meanings = list(dictionary.meaning(message.content.split(" ")[1]).keys())
+                    meanings = list(dictionary.meaning(word).keys())
                     meaning = meanings[0]
                     if (meaning == "Noun"): meaning = "n"
                     elif (meaning == "Verb"): meaning = "v" 
@@ -165,8 +165,8 @@ async def on_message(message):
                 except Exception: 
                     translate_text = "Từ này không có nghĩa"
                     meaning = "none"
-                contents = word + ' ('+ meaning  +'): ' + translate_text
-                embed.add_field(name="Note vocabulary:", value=contents, inline=False)
+                contents += "- " + word + ' ('+ meaning  +'): ' + translate_text + "\n"
+            embed.add_field(name="Note vocabulary:", value=contents, inline=False)
         else:
             embed.add_field(name="Note vocabulary:", value="Bạn chưa note từ nào!", inline=False)
         embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
