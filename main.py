@@ -146,7 +146,7 @@ async def on_message(message):
                     note.append(line)
         else:
             f = open(id + '.txt', 'x')
-            f.close(
+            f.close()
                 
         contents = ""
         for word in note:
