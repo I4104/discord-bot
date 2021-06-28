@@ -103,7 +103,7 @@ async def on_message(message):
                 all_words.append(line.replace("\r", "").replace("\n", ""))
                 
         with open('vocabulary.txt', 'a') as reader:
-            if message.content.split(" ")[1] not in all_words:
+            if message.content.split(" ")[1] not in all_words and translate_text != "Từ này không có nghĩa":
                 reader.write(message.content.split(" ")[1] + "\n")
                 
         note = list()
@@ -117,7 +117,7 @@ async def on_message(message):
             f.close()
         
         with open(id + '.txt', 'a') as reader:
-            if message.content.split(" ")[1] not in note:
+            if message.content.split(" ")[1] not in note and translate_text != "Từ này không có nghĩa":
                 reader.write(message.content.split(" ")[1] + "\n")
                 wo += 1
                 
