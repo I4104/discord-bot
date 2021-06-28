@@ -242,7 +242,8 @@ async def on_message(message):
 
         with open('vocabulary.txt', 'r') as reader:
             for line in reader:
-                all_words.append(line)
+                if (line != "\n" && line != "\r" && line != "\r\n" && line != "\n\r"):
+                    all_words.append(line)
 
         words = list()
         while len(words) < int(message.content.split(" ")[1]):
