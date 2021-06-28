@@ -101,18 +101,17 @@ async def on_message(message):
         with open('vocabulary.txt', 'r') as reader:
             for line in reader:
                 all_words.append(line)
-                wo = len(all_words)
                 
         with open('vocabulary.txt', 'a') as reader:
             if message.content.split(" ")[1] not in all_words:
                 reader.write("\n" +  message.content.split(" ")[1])
-                wo += 1
-
+                
         note = list()
         if os.path.exists(id + '.txt'):
             with open(id + '.txt', 'r') as reader:
                 for line in reader:
                     note.append(line)
+                    wo = len(all_words)
         else:
             f = open(id + '.txt', 'x')
             f.close()
@@ -120,10 +119,11 @@ async def on_message(message):
         with open(id + '.txt', 'a') as reader:
             if message.content.split(" ")[1] not in all_words:
                 reader.write("\n" +  message.content.split(" ")[1])
+                wo += 1
                 
         contents  = message.content.split(" ")[1] + ' ('+ meaning  +'): ' + translate_text
         contents += "\n\n"
-        contents += "- Đã note: " + str(len(note)) + " từ\n"
+        contents += "- Đã note: " + wo + " từ\n"
         contents += "\n"
         
         embed = discord.Embed(color=0xff0000)
@@ -146,10 +146,9 @@ async def on_message(message):
                     note.append(line)
         else:
             f = open(id + '.txt', 'x')
-            f.close()
-        
+            f.close(
                 
-        content = ""
+        contents = ""
         for word in note:
             try:
                 translate_text = translator.translate(word, lang_src='en', lang_tgt='vi')
