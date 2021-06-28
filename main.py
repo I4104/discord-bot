@@ -104,7 +104,7 @@ async def on_message(message):
                 
         with open('vocabulary.txt', 'a') as reader:
             if message.content.split(" ")[1] not in all_words:
-                reader.write("\n" +  message.content.split(" ")[1])
+                reader.write(message.content.split(" ")[1])
                 
         note = list()
         if os.path.exists(id + '.txt'):
