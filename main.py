@@ -336,11 +336,10 @@ async def on_message(message):
                     channel = message.author.voice.channel
                     if voice_client and voice_client.channel != channel:
                         await voice_client.disconnect()
+                        voice_client = await channel.connect(reconnect=False)
                 except AttributeError:
                     await message.channel.send('Bạn cần tham gia một kênh voice!')
                     return
-                
-                voice_client = await channel.connect(reconnect=False)
 
                 myobj = gTTS(text=translate_text, lang=language, slow=False) 
                 myobj.save("output.mp3")
@@ -397,11 +396,10 @@ async def on_message(message):
                 channel = message.author.voice.channel
                 if voice_client and voice_client.channel != channel:
                     await voice_client.disconnect()
+                    voice_client = await channel.connect(reconnect=False)
             except AttributeError:
                 await message.channel.send('Bạn cần tham gia một kênh voice!')
                 return
-
-            voice_client = await channel.connect(reconnect=False)
 
             if path.exists('output.mp3'):
                 await message.channel.send("Đang đọc, cứ từ từ :| mỏi miệng")
@@ -428,11 +426,10 @@ async def on_message(message):
             channel = message.author.voice.channel
             if voice_client and voice_client.channel != channel:
                 await voice_client.disconnect()
+                voice_client = await channel.connect(reconnect=False)
         except AttributeError:
             await message.channel.send('Bạn cần tham gia một kênh voice!')
             return
-
-        voice_client = await channel.connect(reconnect=False)
         
         msg = message.content.split(" ")
         if (msg[1] in country):
