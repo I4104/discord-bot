@@ -334,7 +334,7 @@ async def on_message(message):
             if (message.content.split(" ")[1] == "true"):
                 try:
                     channel = message.author.voice.channel
-                    if voice_client and voice_client != channel:
+                    if voice_client and voice_client.channel != channel:
                         await voice_client.disconnect()
                 except AttributeError:
                     await message.channel.send('Bạn cần tham gia một kênh voice!')
@@ -395,7 +395,7 @@ async def on_message(message):
         if (msg[1] == "true"):
             try:
                 channel = message.author.voice.channel
-                if voice_client and voice_client != channel:
+                if voice_client and voice_client.channel != channel:
                     await voice_client.disconnect()
             except AttributeError:
                 await message.channel.send('Bạn cần tham gia một kênh voice!')
@@ -426,7 +426,7 @@ async def on_message(message):
 
         try:
             channel = message.author.voice.channel
-            if voice_client and voice_client != channel:
+            if voice_client and voice_client.channel != channel:
                 await voice_client.disconnect()
         except AttributeError:
             await message.channel.send('Bạn cần tham gia một kênh voice!')
