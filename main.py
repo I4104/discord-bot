@@ -58,13 +58,13 @@ async def on_message(message):
         contents += " \n"
         contents += "# Information:\n"
         contents += " - Project: Discord Bot\n"
-        contents += " - IDEA: K04\n"
-        contents += " - Version: 1.0.2-beta\n"
+        contents += " - IDEA: I4104\n"
+        contents += " - Version: 1.2.0-beta\n"
 
 
         embed = discord.Embed(color=0x01cb19)
         embed.add_field(name='Thông tin:', value=contents, inline=False)
-        embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
+        embed.set_footer(text='Bot version: 1.2.0 - Admin: Tạ Đăng Khoa')
         
         await message.channel.send(embed=embed)
 
