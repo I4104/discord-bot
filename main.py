@@ -394,11 +394,11 @@ async def on_message(message):
         await message.channel.send(embed=embed)
 
         if (msg[1] == "true"):
-            if voice_client:
-                await voice_client.disconnect()
-
             try:
                 channel = message.author.voice.channel
+                if voice_client and voice_client != channel:
+                    os.remove("output.mp3")
+                    await voice_client.disconnect()
             except AttributeError:
                 await message.channel.send('Bạn cần tham gia một kênh voice!')
                 return
@@ -426,13 +426,14 @@ async def on_message(message):
             await message.channel.send("Đang đọc, cứ từ từ :| mỏi miệng")
             return
 
-        if voice_client:
-            await voice_client.disconnect()
-
         try:
             channel = message.author.voice.channel
+            if voice_client and voice_client != channel:
+                os.remove("output.mp3")
+                await voice_client.disconnect()
         except AttributeError:
             await message.channel.send('Bạn cần tham gia một kênh voice!')
+            return
 
         voice_client = await channel.connect(reconnect=False)
         
