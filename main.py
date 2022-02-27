@@ -24,6 +24,8 @@ client = discord.Client()
 @client.event
 async def on_ready():
     global voice_client
+    if path.exists('output.mp3'):
+        os.remove("output.mp3")
 
     if voice_client:
         await voice_client.disconnect()
@@ -336,10 +338,14 @@ async def on_message(message):
                     channel = message.author.voice.channel
                     if voice_client and voice_client.channel != channel:
                         await voice_client.disconnect()
-                        voice_client = await channel.connect(reconnect=False)
                 except AttributeError:
                     await message.channel.send('Bạn cần tham gia một kênh voice!')
                     return
+
+                try:
+                    voice_client = await channel.connect(reconnect=False)
+                except:
+                    pass
 
                 myobj = gTTS(text=translate_text, lang=language, slow=False) 
                 myobj.save("output.mp3")
@@ -396,10 +402,14 @@ async def on_message(message):
                 channel = message.author.voice.channel
                 if voice_client and voice_client.channel != channel:
                     await voice_client.disconnect()
-                    voice_client = await channel.connect(reconnect=False)
             except AttributeError:
                 await message.channel.send('Bạn cần tham gia một kênh voice!')
                 return
+
+            try:
+                voice_client = await channel.connect(reconnect=False)
+            except:
+                pass
 
             if path.exists('output.mp3'):
                 await message.channel.send("Đang đọc, cứ từ từ :| mỏi miệng")
@@ -426,10 +436,14 @@ async def on_message(message):
             channel = message.author.voice.channel
             if voice_client and voice_client.channel != channel:
                 await voice_client.disconnect()
-                voice_client = await channel.connect(reconnect=False)
         except AttributeError:
             await message.channel.send('Bạn cần tham gia một kênh voice!')
             return
+
+        try:
+            voice_client = await channel.connect(reconnect=False)
+        except:
+            pass
         
         msg = message.content.split(" ")
         if (msg[1] in country):
