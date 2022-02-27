@@ -58,13 +58,13 @@ async def on_message(message):
         contents += " \n"
         contents += "# Information:\n"
         contents += " - Project: Discord Bot\n"
-        contents += " - IDEA: I4104\n"
-        contents += " - Version: 1.2.0-beta\n"
+        contents += " - IDEA: K04\n"
+        contents += " - Version: 1.0.2-beta\n"
 
 
         embed = discord.Embed(color=0x01cb19)
         embed.add_field(name='Thông tin:', value=contents, inline=False)
-        embed.set_footer(text='Bot version: 1.2.0 - Admin: Tạ Đăng Khoa')
+        embed.set_footer(text='Bot version: 1.0.2 - Admin: Tạ Đăng Khoa')
         
         await message.channel.send(embed=embed)
 
@@ -332,11 +332,10 @@ async def on_message(message):
                 return
 
             if (message.content.split(" ")[1] == "true"):
-                if voice_client:
-                    await voice_client.disconnect()
-
                 try:
                     channel = message.author.voice.channel
+                    if voice_client and voice_client != channel:
+                        await voice_client.disconnect()
                 except AttributeError:
                     await message.channel.send('Bạn cần tham gia một kênh voice!')
                     return
@@ -397,7 +396,6 @@ async def on_message(message):
             try:
                 channel = message.author.voice.channel
                 if voice_client and voice_client != channel:
-                    os.remove("output.mp3")
                     await voice_client.disconnect()
             except AttributeError:
                 await message.channel.send('Bạn cần tham gia một kênh voice!')
@@ -429,7 +427,6 @@ async def on_message(message):
         try:
             channel = message.author.voice.channel
             if voice_client and voice_client != channel:
-                os.remove("output.mp3")
                 await voice_client.disconnect()
         except AttributeError:
             await message.channel.send('Bạn cần tham gia một kênh voice!')
