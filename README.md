@@ -2,6 +2,7 @@
 
 ## Technologies Used:
 - Python
+- Require `requirements.txt`
 
 ## Commands:
 - `% <text>`: The bot reads what the user writes.
