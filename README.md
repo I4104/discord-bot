@@ -1,4 +1,5 @@
 # Discord Bot - Project K04
+Simple Discord Bot With Python Language
 
 ## Technologies Used:
 - Python
