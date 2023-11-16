@@ -18,6 +18,7 @@ from google_trans_new import google_translator
 from discord import FFmpegPCMAudio
 
 voice_client = None
+your_bot_token = ""
 
 client = discord.Client()
 
@@ -462,5 +463,5 @@ async def on_message(message):
 
         await message.delete()
 
-client.run('Nzc4NjQ5NTIzNzQ4MjA4NjQw.X7VD4Q.5jbVphclmXv5upqHaVO97jqSYkg')
+client.run(your_bot_token)
 
